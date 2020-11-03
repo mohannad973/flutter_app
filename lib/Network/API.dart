@@ -233,4 +233,22 @@ class API {
     }
   }
 
+
+  Future getEndoProducts(String id ) async{
+    String url = Uri.encodeFull(
+        newBaseUrl+'/endo/getProd/$id');
+
+    http.Response response = await http.get(url);
+    return response;
+  }
+
+  Future getEndoCats( ) async{
+    String url = Uri.encodeFull(
+        newBaseUrl+'/endo/getCats');
+
+    http.Response response = await http.get(url);
+    return response;
+  }
+
+
 }
