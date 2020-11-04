@@ -9,64 +9,119 @@ import '../Utils/app_url.dart';
 
 Widget MainWidget(String title, String image, BuildContext context) {
   return Container(
+    width: MediaQuery.of(context).size.width,
     height: 200,
     child: ClipRRect(
       borderRadius: BorderRadius.circular(20.0),
-      child: Stack(
-        children: <Widget>[
-          ClipRRect(
-            borderRadius: BorderRadius.circular(20.0),
-            child: Stack(
-              children: [
-                Center(
+
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          new Flexible(
+            child:   Container(
+                child: Center(
+                  child: Container(
+                    width: 50,
+                    height: 100,
                     child: FadeInImage.assetNetwork(
-                  placeholder: 'assets/loading.gif',
-                  image: (AppUrl.imageUrl + image),
-                  fit: BoxFit.fitWidth,
-                  height: 200,
-                  width: 100,
-                )),
-                //
-              ],
-            ),
-          ),
-          Container(
-            height: double.infinity,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-//               gradient: LinearGradient(
-//                 colors: [
-//                   Color.fromRGBO(255, 255, 255, 1),
-//                   Color.fromRGBO(0, 0, 0, 0.1),
-// //                                  Color.fromRGBO(39, 92, 93, 0.4),
-// //                                  Color.fromRGBO(126, 184, 186, 0.4),
-//                 ],
-//                 begin: const FractionalOffset(0.0, 0.0),
-//                 end: const FractionalOffset(0.5, 0.5),
-//                 stops: [0.0, 0.6],
-//                 tileMode: TileMode.clamp,
-//               ),
-            ),
-          ),
-          Center(
-            child: Text(
-              title,
-              style: TextStyle(
-                color: Theme.of(context).accentColor,
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-                shadows: <Shadow>[
-                  Shadow(
-                    offset: Offset(3, 3),
-                    blurRadius: 2.0,
-                    color: Colors.black,
+                      placeholder: 'assets/loading.gif',
+                      image: (AppUrl.imageUrl + image),
+                      fit: BoxFit.fitHeight,
+                      // height: 200,
+                      // width: 100,
+                    ),
                   ),
-                ],
+                ),
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: ExactAssetImage(
+                        "assets/photo5843754424906921069.jpg"),
+                    fit: BoxFit.cover,
+                  ),
+                )),
+          ),
+          new Flexible(
+            child:     Container(
+              color: Colors.black,
+              child: Center(
+                child: Text(
+                  title,
+                  style: TextStyle(
+                    color: Theme.of(context).accentColor,
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                    shadows: <Shadow>[
+                      Shadow(
+                        offset: Offset(3, 3),
+                        blurRadius: 2.0,
+                        color: Colors.black,
+                      ),
+                    ],
+                  ),
+                ),
               ),
-            ),
-          )
+            )
+          ),
         ],
       ),
+
+
     ),
   );
 }
+
+
+// child: Stack(
+//   children: [
+//     Container(
+//         child: Center(
+//           child: Container(
+//             width: 50,
+//             height: 100,
+//             child: FadeInImage.assetNetwork(
+//               placeholder: 'assets/loading.gif',
+//               image: (AppUrl.imageUrl + image),
+//               fit: BoxFit.fitHeight,
+//               // height: 200,
+//               // width: 100,
+//             ),
+//           ),
+//         ),
+//         width: double.infinity,
+//         decoration: BoxDecoration(
+//           image: DecorationImage(
+//             image: ExactAssetImage(
+//                 "assets/photo5843754424906921069.jpg"),
+//             fit: BoxFit.cover,
+//           ),
+//         )),
+//     Center(
+//       child: Text(
+//         title,
+//         style: TextStyle(
+//           color: Theme.of(context).accentColor,
+//           fontSize: 30,
+//           fontWeight: FontWeight.bold,
+//           shadows: <Shadow>[
+//             Shadow(
+//               offset: Offset(3, 3),
+//               blurRadius: 2.0,
+//               color: Colors.black,
+//             ),
+//           ],
+//         ),
+//       ),
+//     )
+//     // Center(
+//     //     child:
+//     //     FadeInImage.assetNetwork(
+//     //       placeholder: 'assets/loading.gif',
+//     //       image: (AppUrl.imageUrl + image),
+//     //       fit: BoxFit.fitWidth,
+//     //       height: 200,
+//     //       width: 100,
+//     //     )),
+//     //
+//   ],
+// ),

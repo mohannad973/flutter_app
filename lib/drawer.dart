@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:ora_app/app_icons.dart';
 import 'package:ora_app/events_and_educations.dart';
 import 'package:ora_app/sign_in.dart';
+import 'package:provider/provider.dart';
+import 'Providers/endo_cats_provider.dart';
 import 'modules.dart';
 
 class DrawerView extends StatefulWidget {

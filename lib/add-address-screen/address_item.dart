@@ -195,11 +195,15 @@ class _AddressItemState extends State<AddressItem> {
     showDialog(
         context: context,
         builder: (BuildContext context) {
+          var height = MediaQuery.of(context).size.height;
+          var width = MediaQuery.of(context).size.width;
           return AlertDialog(
+
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
             scrollable: true,
             content: Container(
+
               child: Form(
                   child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

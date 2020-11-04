@@ -17,6 +17,7 @@ class _EndoHomeState extends State<EndoHome> {
     super.initState();
     // Provider.of<EndoProductsProvider>(context, listen: false)
     //     .getEndoProducts(1);
+
     Provider.of<EndoCatsProvider>(context, listen: false).getEndoCat();
   }
 
@@ -24,8 +25,8 @@ class _EndoHomeState extends State<EndoHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: (Provider.of<EndoProductsProvider>(context).isLoading() ||
-              Provider.of<EndoCatsProvider>(context).isLoading())
+      body:
+              Provider.of<EndoCatsProvider>(context).isLoading()
           ? Center(
               child: CircularProgressIndicator(
               backgroundColor: Colors.black54,

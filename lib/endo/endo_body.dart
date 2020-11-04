@@ -89,13 +89,26 @@ class _EndoBodyState extends State<EndoBody> {
                     widget.selectedIndex = index;
                     Provider.of<EndoProductsProvider>(context, listen: false)
                         .getEndoProducts(widget.selectedIndex);
-
                   });
                 },
               ),
             ),
           ),
-          EndoItemList(endoProductList: Provider.of<EndoProductsProvider>(context).endoProducts,),
+          Provider.of<EndoProductsProvider>(context).isLoading()
+              ? Container(
+                  height: 200,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 20),
+                    child: Center(
+                        child: CircularProgressIndicator(
+                      backgroundColor: Colors.black54,
+                    )),
+                  ),
+                )
+              : EndoItemList(
+                  endoProductList:
+                      Provider.of<EndoProductsProvider>(context).endoProducts,
+                ),
         ],
       ),
     );
