@@ -5,7 +5,6 @@ import 'package:ora_app/Models/ChangePasswordBody.dart';
 import 'package:ora_app/Models/rigesterBody.dart';
 import 'package:ora_app/home_page.dart';
 import 'package:ora_app/profile.dart';
-import 'file:///E:/hashtag%20progects/ora-master/lib/register/sign_up.dart';
 import 'package:provider/provider.dart';
 import 'My_Addresses.dart';
 import 'Network/API.dart';
@@ -13,7 +12,7 @@ import 'Providers/change_password_provider.dart';
 import 'Utils/form_validators.dart';
 import 'app_bar.dart';
 import 'Utils/decorations.dart';
-import 'package:http/http.dart'as http;
+import 'package:http/http.dart' as http;
 
 String oldPassword = '';
 String newPassword = '';
@@ -31,18 +30,12 @@ final TextEditingController oldPasswordController = TextEditingController();
 final TextEditingController newPasswordController = TextEditingController();
 final TextEditingController confirmPasswordController = TextEditingController();
 
-
-
 class ChangePassword extends StatefulWidget {
   @override
   _ChangePasswordState createState() => _ChangePasswordState();
 }
 
 class _ChangePasswordState extends State<ChangePassword> {
-
-
-
-
   // _changePassword(ChangePasswordBody changePasswordBody) async{
   //   String responseCode;
   //   debugPrint('channgebodyis: ${changePasswordBody.user_id}'+'${changePasswordBody.old_password}'+'${changePasswordBody.new_password}');
@@ -61,45 +54,36 @@ class _ChangePasswordState extends State<ChangePassword> {
   //   //print(categories[0].engName);
   // }
 
-
-
-
-  Future<ChangePasswordResponse> changePassword(ChangePasswordBody changePasswordBody) async{
-    debugPrint('channgebodyis: ${changePasswordBody.user_id}'+'${changePasswordBody.old_password}'+'${changePasswordBody.new_password}');
+  Future<ChangePasswordResponse> changePassword(
+      ChangePasswordBody changePasswordBody) async {
+    debugPrint('channgebodyis: ${changePasswordBody.user_id}' +
+        '${changePasswordBody.old_password}' +
+        '${changePasswordBody.new_password}');
     final String apiUrl = "http://ora.hashtagweb.online/api/changePassword";
-    final response = await http.post(apiUrl,body:{
-      "user_id":changePasswordBody.user_id,
-      "old_password":changePasswordBody.old_password,
-      "new_password":changePasswordBody.new_password,
-
-    } );
+    final response = await http.post(apiUrl, body: {
+      "user_id": changePasswordBody.user_id,
+      "old_password": changePasswordBody.old_password,
+      "new_password": changePasswordBody.new_password,
+    });
 
     debugPrint('myStatusCode: ${response.statusCode.toString()}');
 
-    if(response.statusCode==200){
+    if (response.statusCode == 200) {
       debugPrint('if200: ${response.statusCode.toString()}');
       final String responseString = response.body;
       return changePasswordResponseFromJson(responseString);
-
-    }else{
+    } else {
       debugPrint('if400: ${response.statusCode.toString()}');
       return null;
     }
-
   }
-
-
-
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-
-        appBar: topBar (context , barWithBack(context) , Text ('Ora'),barWithSearch(context)),
-        body: changePasswordUI(context),
-
+      appBar: topBar(
+          context, barWithBack(context), Text('Ora'), barWithSearch(context)),
+      body: changePasswordUI(context),
     );
   }
 
@@ -125,7 +109,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                     SizedBox(
                       height: 30,
                     ),
-                  oldPasswordInput(),
+                    oldPasswordInput(),
                     SizedBox(
                       height: 30,
                     ),
@@ -133,12 +117,15 @@ class _ChangePasswordState extends State<ChangePassword> {
                     SizedBox(
                       height: 30,
                     ),
-                  confirmPasswordInput(),
+                    confirmPasswordInput(),
                     SizedBox(
                       height: 60,
                     ),
-                  Provider.of<ChangePasswordProvider>(context).loading? CircularProgressIndicator(backgroundColor: Colors.teal,):
-                  changeButton(context)
+                    Provider.of<ChangePasswordProvider>(context).loading
+                        ? CircularProgressIndicator(
+                            backgroundColor: Colors.teal,
+                          )
+                        : changeButton(context)
                   ],
                 ),
               ),
@@ -150,17 +137,16 @@ class _ChangePasswordState extends State<ChangePassword> {
   }
 }
 
-
 Widget oldPasswordInput() {
   return TextFormField(
     controller: oldPasswordController,
     focusNode: _oldPasswordFocusNode,
-    keyboardType: TextInputType.text ,
+    keyboardType: TextInputType.text,
     obscureText: true,
     decoration: passwordDecoration(),
     textInputAction: TextInputAction.done,
-    validator:passwordValidator(),
-    onSaved: (password)=> oldPassword = password,
+    validator: passwordValidator(),
+    onSaved: (password) => oldPassword = password,
   );
 }
 
@@ -168,85 +154,83 @@ Widget newPasswordInput() {
   return TextFormField(
     controller: newPasswordController,
     focusNode: _newPasswordlFocusNode,
-    keyboardType: TextInputType.text ,
+    keyboardType: TextInputType.text,
     obscureText: true,
     decoration: passwordDecoration(),
     textInputAction: TextInputAction.done,
-    validator:passwordValidator(),
-    onSaved: (password)=> newPassword = password,
+    validator: passwordValidator(),
+    onSaved: (password) => newPassword = password,
   );
 }
-
 
 Widget confirmPasswordInput() {
   return TextFormField(
     controller: confirmPasswordController,
     focusNode: _confirmPasswordFocusNode,
-    keyboardType: TextInputType.text ,
+    keyboardType: TextInputType.text,
     obscureText: true,
     decoration: passwordDecoration(),
     textInputAction: TextInputAction.done,
-    validator:matchPasswordValidator(newPasswordController.text),
-    onSaved: (password)=> confirmPassword = password,
+    validator: matchPasswordValidator(newPasswordController.text),
+    onSaved: (password) => confirmPassword = password,
   );
 }
 
-Widget changeButton(BuildContext context){
+Widget changeButton(BuildContext context) {
   return RaisedButton(
     elevation: 0.0,
     color: Theme.of(context).primaryColor,
-    shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0)),
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
     onPressed: () async {
-      if(_formKey.currentState.validate()){
-
+      if (_formKey.currentState.validate()) {
         Future<String> userId = sessionManager.getUserId();
         userId.then((data) {
           print("userId " + data.toString());
-        },onError: (e) {
+        }, onError: (e) {
           print(e);
         });
         String sId = await userId;
 
-
-        ChangePasswordBody changeBody= new ChangePasswordBody(
+        ChangePasswordBody changeBody = new ChangePasswordBody(
             user_id: sId,
-            old_password:oldPasswordController.text,
-            new_password: newPasswordController.text );
-        response = await Provider.of<ChangePasswordProvider>(context,listen: false).changePassword(oldPasswordController.text, newPasswordController.text, sId);
-        if(response){
+            old_password: oldPasswordController.text,
+            new_password: newPasswordController.text);
+        response = await Provider.of<ChangePasswordProvider>(context,
+                listen: false)
+            .changePassword(
+                oldPasswordController.text, newPasswordController.text, sId);
+        if (response) {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => Profile()),
-
-          );}else{
+          );
+        } else {
           Scaffold.of(context).showSnackBar(SnackBar(
             content: Text("test"),
           ));
         }
 
         _formKey.currentState.save();
-
       }
-      toastMessage("Username: $oldPassword\nEmail: $newPassword\nPassword: $oldPassword");
+      toastMessage(
+          "Username: $oldPassword\nEmail: $newPassword\nPassword: $oldPassword");
     },
     child: Text('Change Password'),
     textColor: Colors.white,
   );
 }
 
-
-void toastMessage(String message){
+void toastMessage(String message) {
   Fluttertoast.showToast(
       msg: message,
       toastLength: Toast.LENGTH_SHORT,
       gravity: ToastGravity.TOP,
       timeInSecForIosWeb: 1,
-      fontSize: 16.0
-  );
+      fontSize: 16.0);
 }
 
-void fieldFocusChange(BuildContext context, FocusNode currentFocus,FocusNode nextFocus) {
+void fieldFocusChange(
+    BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
   currentFocus.unfocus();
   FocusScope.of(context).requestFocus(nextFocus);
 }

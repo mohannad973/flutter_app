@@ -117,7 +117,6 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                       SizedBox(
                         height: 20,
                       ),
-
                       Padding(
                         padding: const EdgeInsets.only(bottom: 8.0, left: 3.0),
                         child: Text(
@@ -155,7 +154,6 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                           decoration: inputDecoration().copyWith(hintText: ''),
                         ),
                       ),
-
                       SizedBox(
                         height: 20,
                       ),
@@ -219,7 +217,6 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                       SizedBox(
                         height: 20,
                       ),
-
                       Padding(
                         padding: const EdgeInsets.only(bottom: 8.0, left: 3.0),
                         child: Text(
@@ -240,67 +237,80 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                       SizedBox(
                         height: 20,
                       ),
-                       Provider.of<AddAddressProvider>(context).isLoading()? Center(child: CircularProgressIndicator(backgroundColor: Colors.black87,))
-                      :Container(
-                        width: MediaQuery.of(context).size.width,
-                        alignment: Alignment.center,
-                        padding:
-                            EdgeInsets.symmetric(vertical: 0, horizontal: 0),
-                        child: RaisedButton(
-                          color: Colors.black87,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          elevation: 0,
-                          onPressed: () async {
-                            String authToken= await sessionManager.getAuthToken();
-                            if (_addresskey.currentState.validate()) {
-                              final String email = emailController.text;
-                              final String password = passwordController.text;
+                      Provider.of<AddAddressProvider>(context).isLoading()
+                          ? Center(
+                              child: CircularProgressIndicator(
+                              backgroundColor: Colors.black87,
+                            ))
+                          : Container(
+                              width: MediaQuery.of(context).size.width,
+                              alignment: Alignment.center,
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 0, horizontal: 0),
+                              child: RaisedButton(
+                                color: Colors.black87,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                elevation: 0,
+                                onPressed: () async {
+                                  String authToken =
+                                      await sessionManager.getAuthToken();
+                                  if (_addresskey.currentState.validate()) {
+                                    final String email = emailController.text;
+                                    final String password =
+                                        passwordController.text;
 
-                              final addressBody = AddAddressBody(
-                                  city: city,
-                                  country: country,
-                                  address1: adreesLine1Controller.text,
-                                  address2: adressLine2Controller.text,
-                                  addressPhone: phoneController.text,
-                                  state: stateController.text,
-                                  zipCode: zipCodeController.text,
-                                additionalInfo: additionalInfoController.text
-                              );
-                              // final UserModel user = await register(registerBody);
-                              print("auth token address : "+authToken);
-                              Provider.of<AddAddressProvider>(context,
-                                      listen: false)
-                                  .addAddress(addressBody,authToken);
-                              print("added test  "+Provider.of<AddAddressProvider>(context,
-                                  listen: false)
-                                  .added.toString());
-                              if (Provider.of<AddAddressProvider>(context,
-                                          listen: false)
-                                      .added !=
-                                  false) {
-                                Provider.of<ProfileProvider>(context,listen: false).getProfile(authToken);
-                                Timer(Duration(seconds: 3), () {
-
-                                  Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => MyAddresses(addressList:Provider.of<ProfileProvider>(context,listen: false).addresses ,)),
-                                  );
-                                });
-                              }
-                            }
-                            _addresskey.currentState.save();
-                          },
-                          child: Text(
-                            "Add Address",
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      )
+                                    final addressBody = AddAddressBody(
+                                        city: city,
+                                        country: country,
+                                        address1: adreesLine1Controller.text,
+                                        address2: adressLine2Controller.text,
+                                        addressPhone: phoneController.text,
+                                        state: stateController.text,
+                                        zipCode: zipCodeController.text,
+                                        additionalInfo:
+                                            additionalInfoController.text);
+                                    // final UserModel user = await register(registerBody);
+                                    print("auth token address : " + authToken);
+                                    Provider.of<AddAddressProvider>(context,
+                                            listen: false)
+                                        .addAddress(addressBody, authToken);
+                                    // print("added test  "+Provider.of<AddAddressProvider>(context,
+                                    //     listen: false)
+                                    //     .added.toString());
+                                    if (Provider.of<AddAddressProvider>(context,
+                                                listen: false)
+                                            .added !=
+                                        false) {
+                                      Provider.of<ProfileProvider>(context,
+                                              listen: false)
+                                          .getProfile(authToken);
+                                      Timer(Duration(seconds: 3), () {
+                                        Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => MyAddresses(
+                                                    addressList: Provider.of<
+                                                                ProfileProvider>(
+                                                            context,
+                                                            listen: false)
+                                                        .addresses,
+                                                  )),
+                                        );
+                                      });
+                                    }
+                                  }
+                                  _addresskey.currentState.save();
+                                },
+                                child: Text(
+                                  "Add Address",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            )
                     ],
                   ),
                 ),

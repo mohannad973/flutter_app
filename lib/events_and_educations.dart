@@ -53,7 +53,11 @@ class _EventsAndEducationsState extends State<EventsAndEducations> {
     await API.getCources().then((response) {
       setState(() {
         coursesList = coursesResponseFromJson(response.body.toString());
-        coursesList.courses.add(Course(id: 1,title: "course 1",description: "flutter app development using dart language",videoUrl: "ExKYjqgswJg"));
+        coursesList.courses.add(Course(
+            id: 1,
+            title: "course 1",
+            description: "flutter app development using dart language",
+            videoUrl: "ExKYjqgswJg"));
       });
     });
     //print(categories[0].engName);
@@ -90,12 +94,12 @@ class _EventsAndEducationsState extends State<EventsAndEducations> {
               fontSize: 22.0,
             ),
           ),
-          gradient: LinearGradient(
-            colors: [
-              Theme.of(context).primaryColor,
-              Theme.of(context).primaryColor,
-            ],
-          ),
+          // gradient: LinearGradient(
+          //   colors: [
+          //     Theme.of(context).primaryColor,
+          //     Theme.of(context).primaryColor,
+          //   ],
+          // ),
           bottom: TabBar(
             unselectedLabelColor: Colors.black,
             labelColor: Colors.white,
@@ -176,7 +180,6 @@ class _EventsAndEducationsState extends State<EventsAndEducations> {
                   ),
           ],
         ),
-
       ),
     );
   }
@@ -217,18 +220,18 @@ Widget eventsWidget(String title, String imageUrl, BuildContext context) {
               height: double.infinity,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                gradient: LinearGradient(
-                  colors: [
-                    Color.fromRGBO(13, 128, 133,0.4),
-                    Color.fromRGBO(13, 128, 133,0.4),
-//                                Color.fromRGBO(39, 92, 93, 0.4),
-//                                Color.fromRGBO(126, 184, 186, 0.4),
-                  ],
-                  begin: const FractionalOffset(0.0, 0.0),
-                  end: const FractionalOffset(0.5, 0.0),
-                  stops: [0.0, 1.0],
-                  tileMode: TileMode.clamp,
-                ),
+//                 gradient: LinearGradient(
+//                   colors: [
+//                     Color.fromRGBO(13, 128, 133,0.4),
+//                     Color.fromRGBO(13, 128, 133,0.4),
+// //                                Color.fromRGBO(39, 92, 93, 0.4),
+// //                                Color.fromRGBO(126, 184, 186, 0.4),
+//                   ],
+//                   begin: const FractionalOffset(0.0, 0.0),
+//                   end: const FractionalOffset(0.5, 0.0),
+//                   stops: [0.0, 1.0],
+//                   tileMode: TileMode.clamp,
+//                 ),
               ),
             ),
             Center(

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 
-
 import 'body.dart';
 
 class TrackOrder extends StatefulWidget {
@@ -12,9 +11,9 @@ class TrackOrder extends StatefulWidget {
 class _TrackOrderState extends State<TrackOrder> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold (
+    return Scaffold(
       backgroundColor: Colors.white54.withOpacity(0.9),
-      appBar:  GradientAppBar(
+      appBar: GradientAppBar(
         title: Text(
           'Track ordre',
           style: TextStyle(
@@ -23,12 +22,12 @@ class _TrackOrderState extends State<TrackOrder> {
             fontSize: 22.0,
           ),
         ),
-        gradient: LinearGradient(
-          colors: [
-            Theme.of(context).primaryColor,
-            Theme.of(context).primaryColor,
-          ],
-        ),
+        // gradient: LinearGradient(
+        //   colors: [
+        //     Theme.of(context).primaryColor,
+        //     Theme.of(context).primaryColor,
+        //   ],
+        // ),
 
         actions: <Widget>[
           IconButton(

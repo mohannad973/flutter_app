@@ -10,7 +10,6 @@ import '../app_bar.dart';
 import '../Utils/decorations.dart';
 import '../Models/SignUpModel.dart';
 import 'package:http/http.dart' as http;
-import 'file:///E:/hashtag%20progects/ora-master/lib/register/sign_up.dart';
 
 class AddressScreen extends StatefulWidget {
   final AddressModul address;
@@ -135,8 +134,11 @@ class _AddressFormUIState extends State<AddressFormUI> {
                           ),
                         ),
 
-                      Provider.of<CitiesProvider>(context).isLoading()?CircularProgressIndicator(backgroundColor: Colors.black87,)
-                      : CityPicker(),
+                        Provider.of<CitiesProvider>(context).isLoading()
+                            ? CircularProgressIndicator(
+                                backgroundColor: Colors.black87,
+                              )
+                            : CityPicker(),
 
                         // : Center(
                         //     child: CircularProgressIndicator(

@@ -10,7 +10,6 @@ import '../Utils/decorations.dart';
 import 'package:flutter/material.dart';
 import 'package:ora_app/Util/session_manager.dart';
 import 'package:ora_app/home_page.dart';
-import 'file:///E:/hashtag%20progects/ora-master/lib/register/sign_up.dart';
 import '../Models/userModel.dart';
 import '../Utils/decorations.dart';
 import 'package:http/http.dart' as http;
@@ -146,10 +145,9 @@ class _SignUpState extends State<SignUp> {
                     ),
                   ),
                   Container(
-
                     child: TextFormField(
                       scrollPadding:
-                      EdgeInsets.symmetric(vertical: 3.0, horizontal: 3.0),
+                          EdgeInsets.symmetric(vertical: 3.0, horizontal: 3.0),
                       validator: emptyFieldVAlidator(firstName),
                       onChanged: (val) {
                         setState(() => firstName = val);
@@ -175,7 +173,7 @@ class _SignUpState extends State<SignUp> {
                     // height: 50,
                     child: TextFormField(
                       scrollPadding:
-                      EdgeInsets.symmetric(vertical: 3.0, horizontal: 3.0),
+                          EdgeInsets.symmetric(vertical: 3.0, horizontal: 3.0),
                       onChanged: (val) {
                         setState(() => lastName = val);
                       },
@@ -198,10 +196,10 @@ class _SignUpState extends State<SignUp> {
                     ),
                   ),
                   Container(
-                   // height: 50,
+                    // height: 50,
                     child: TextFormField(
                       scrollPadding:
-                      EdgeInsets.symmetric(vertical: 3.0, horizontal: 3.0),
+                          EdgeInsets.symmetric(vertical: 3.0, horizontal: 3.0),
                       onChanged: (val) {
                         setState(() => email = val);
                       },
@@ -228,7 +226,7 @@ class _SignUpState extends State<SignUp> {
                     // height: 50,
                     child: TextFormField(
                       scrollPadding:
-                      EdgeInsets.symmetric(vertical: 3.0, horizontal: 3.0),
+                          EdgeInsets.symmetric(vertical: 3.0, horizontal: 3.0),
                       onChanged: (val) {
                         setState(() => password = val);
                       },
@@ -265,7 +263,7 @@ class _SignUpState extends State<SignUp> {
                     // height: 50,
                     child: TextFormField(
                       scrollPadding:
-                      EdgeInsets.symmetric(vertical: 3.0, horizontal: 3.0),
+                          EdgeInsets.symmetric(vertical: 3.0, horizontal: 3.0),
                       onChanged: (val) {
                         setState(() => phone = val);
                       },
@@ -288,13 +286,12 @@ class _SignUpState extends State<SignUp> {
                       ),
                       elevation: 0,
                       onPressed: () => {
-                      Provider.of<CountryProvider>(context,listen: false).getCountries(),
-
+                        Provider.of<CountryProvider>(context, listen: false)
+                            .getCountries(),
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => AddressScreen(
                                   address: addressModul,
                                 )))
-
                       },
                       label: Text(
                         'Add Address',

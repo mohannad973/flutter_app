@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
 
-
 import 'package:flutter/material.dart';
 import 'package:ora_app/Models/AddressResponseModel.dart';
 import 'package:ora_app/Models/StringSuccessResponse.dart';
+import 'package:ora_app/Models/add_addressBody.dart';
 import 'package:ora_app/Models/profile_response_model.dart';
 import 'package:ora_app/Providers/profile_provider.dart';
 import 'package:ora_app/add-address-screen/add_address_home.dart';
@@ -28,7 +28,6 @@ import 'package:http/http.dart' as http;
 class MyAddresses extends StatefulWidget {
   var addressList = new List<Address>();
 
-
   MyAddresses({this.addressList});
 
   @override
@@ -36,14 +35,7 @@ class MyAddresses extends StatefulWidget {
 }
 // SessionManager sessionManager = SessionManager();
 
-
-
-
 class _MyAddressesState extends State<MyAddresses> {
-
-
-
-
   // Future<List<AddressResponseModel>> getAddress() async{
   //
   //   Future<String> authToken = sessionManager.getAuthToken();
@@ -80,40 +72,66 @@ class _MyAddressesState extends State<MyAddresses> {
   //
   // }
 
-  _deleteAddress( int id , String token) async {
+  _deleteAddress(int id, String token) async {
     API api = API();
 
-    try{ final response = await api.deleteAddress(id, token);
-    print("deleeeeeete " + id.toString());
-    print("token123 " + token.toString());
-    if (response.success = true) {
-
-      final String responseString = response.toString();
-      return true;
-
-    } else {
-
-      return false;
-    }}catch(e){
-      print ("erroe catch "+ e.toString());
+    try {
+      final response = await api.deleteAddress(id, token);
+      // print("deleeeeeete " + id.toString());
+      // print("token123 " + token.toString());
+      if (response.success = true) {
+        final String responseString = response.toString();
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      print("error catch " + e.toString());
     }
-
-
-
   }
 
-  deleteItem (int index) async{
-    print("delete 123"+ index.toString());
+  deleteItem(int index) async {
+    // print("delete 123" + index.toString());
     SessionManager sessionManager = SessionManager();
     String token = await sessionManager.getAuthToken();
     setState(() {
-      widget.addressList.removeAt(index);
       _deleteAddress(widget.addressList[index].id, token);
+      widget.addressList.removeAt(index);
     });
   }
 
+  _editAddress(int id, String token, AddAddressBody addressInfo) async {
+    API api = API();
+    try {
+      print("upapapapapapa  " + id.toString());
+      print("token123 " + token.toString());
+      final response = await api.editAddress(id, token, addressInfo);
+      if (response.success == true) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+  }
 
-  _getAddress() async{
+  editAddress(int index) async {
+    SessionManager sessionManager = SessionManager();
+    String token = await sessionManager.getAuthToken();
+    print("updaaaaaaaaaaaaaaaaate 123" + index.toString());
+    AddAddressBody addressInfo = AddAddressBody(
+        address1: widget.addressList[index].additionalInfo,
+        addressPhone: widget.addressList[index].phone,
+        city: widget.addressList[index].city,
+        country: widget.addressList[index].country,
+        zipCode: widget.addressList[index].zipCode);
+    setState(() {
+      _editAddress(widget.addressList[index].id, token, addressInfo);
+    });
+  }
+
+  _getAddress() async {
     //
     // Future<String> authToken = sessionManager.getAuthToken();
     // authToken.then((data) {
@@ -123,7 +141,6 @@ class _MyAddressesState extends State<MyAddresses> {
     // });
 
     // String token = await authToken;
-
 
     //
     // API.getAddress(token).then((response) {
@@ -143,12 +160,9 @@ class _MyAddressesState extends State<MyAddresses> {
   }
 
   @override
-  Future<void> initState()  {
+  Future<void> initState() {
     //addressesList.clear();
     _getAddress();
-
-
-
   }
 
   dispose() {
@@ -157,40 +171,49 @@ class _MyAddressesState extends State<MyAddresses> {
 
   @override
   Widget build(BuildContext context) {
-    print("adress info : "+ widget.addressList.toString());
+    print("adress info : " + widget.addressList.toString());
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: topBar(context, barWithBack(context), Text ('Addresses'),barWithAdd(context)),
-
-      body: Provider.of<ProfileProvider>(context).loading?Center(child: CircularProgressIndicator(backgroundColor: Colors.black12,)):
-      SafeArea(
-        top: false,
-        bottom: false,
-        child: ListView.builder (
-          itemCount: widget.addressList == null ? 0 : widget.addressList.length,
-          itemBuilder: (context , index){
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              //  child: AddressCard( item: widget.addressList[index], detectListItem: () => deleteItem(index),
-               // ),
-              child: AddressItem(addressItem: widget.addressList[index],delete: () => deleteItem(index)
-              ,),
-            );
-          },
-        ),
-
-      ),
+      appBar: topBar(context, barWithBack(context), Text('Addresses'),
+          barWithAdd(context)),
+      body: Provider.of<ProfileProvider>(context).loading
+          ? Center(
+              child: CircularProgressIndicator(
+              backgroundColor: Colors.black12,
+            ))
+          : SafeArea(
+              top: false,
+              bottom: false,
+              child: ListView.builder(
+                itemCount:
+                    widget.addressList == null ? 0 : widget.addressList.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    //  child: AddressCard( item: widget.addressList[index], detectListItem: () => deleteItem(index),
+                    // ),
+                    child: AddressItem(
+                      addressItem: widget.addressList[index],
+                      delete: () => deleteItem(index),
+                      update: () => editAddress(index),
+                    ),
+                  );
+                },
+              ),
+            ),
       floatingActionButton: FloatingActionButton(
         tooltip: 'Add Address',
         backgroundColor: Theme.of(context).primaryColor,
-        child: Icon(Icons.add,color: Colors.white,),
+        child: Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
         onPressed: () => {
-        Provider.of<CountryProvider>(context,listen: false).getCountries(),
-            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => AddAddressScreen()))
+          Provider.of<CountryProvider>(context, listen: false).getCountries(),
+          Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) => AddAddressScreen()))
         },
       ),
     );
   }
 }
-
-

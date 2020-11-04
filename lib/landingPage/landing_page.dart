@@ -55,11 +55,12 @@ class _LandingPageState extends State<LandingPage> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          gradient: LinearGradient(
-              colors: [const Color(0xff3C8CE7), const Color(0xff00EAFF)])),
+          // gradient: LinearGradient(
+          //     colors: [const Color(0xff3C8CE7), const Color(0xff00EAFF)]),
+          ),
       child: Scaffold(
         body: Container(
-          height: MediaQuery.of(context).size.height -61,
+          height: MediaQuery.of(context).size.height - 61,
           child: PageView(
             controller: controller,
             onPageChanged: (index) {
@@ -75,7 +76,6 @@ class _LandingPageState extends State<LandingPage> {
                 image3: "assets/1-1.png",
                 imageBg: "assets/bg.jpg",
               ),
-
             ],
           ),
         ),
@@ -236,18 +236,18 @@ class SlideTile2 extends StatelessWidget {
       top: true,
       child: Container(
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              stops: [0.1, 0.5, 0.7, 0.9],
-              colors: [
-                Color.fromRGBO(54, 122, 125,0.9),
-                Color.fromRGBO(57, 125, 128,0.9),
-                Color.fromRGBO(85, 153, 156,0.99),
-                Color.fromRGBO(103, 173, 175,0.9),
-              ],
-            ),
-          ),
+              // gradient: LinearGradient(
+              //   begin: Alignment.topLeft,
+              //   end: Alignment.bottomRight,
+              //   stops: [0.1, 0.5, 0.7, 0.9],
+              //   colors: [
+              //     Color.fromRGBO(54, 122, 125,0.9),
+              //     Color.fromRGBO(57, 125, 128,0.9),
+              //     Color.fromRGBO(85, 153, 156,0.99),
+              //     Color.fromRGBO(103, 173, 175,0.9),
+              //   ],
+              // ),
+              ),
           height: MediaQuery.of(context).size.height,
 
           // padding: EdgeInsets.symmetric(horizontal: 20),
@@ -265,22 +265,21 @@ class SlideTile2 extends StatelessWidget {
                   fit: BoxFit.fill,
                 ),
               ),
-
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  SizedBox(height: 100,),
+                  SizedBox(
+                    height: 100,
+                  ),
                   Flexible(
                     flex: 3,
                     child: Center(
                       child: Container(
-
-
                         alignment: Alignment.center,
                         child: Image.asset(
                           "assets/Untitled-2 (1).png",
-                         height: 257,
+                          height: 257,
                           width: 141,
                           color: Colors.white,
                           fit: BoxFit.fill,
@@ -308,8 +307,6 @@ class SlideTile2 extends StatelessWidget {
     );
   }
 }
-
-
 
 class SlideTile1 extends StatelessWidget {
   String image1, image2, image3, imageBg;
@@ -366,14 +363,13 @@ class SlideTile1 extends StatelessWidget {
                       ),
                     ),
                   ),
-
                 ],
               )
             ],
           )
-        // padding: EdgeInsets.symmetric(horizontal: 20),
+          // padding: EdgeInsets.symmetric(horizontal: 20),
 
-      ),
+          ),
     );
   }
 }

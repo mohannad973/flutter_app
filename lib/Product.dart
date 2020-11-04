@@ -15,8 +15,7 @@ class ProductModulPage extends StatefulWidget {
   Product productDetail;
   String subCatName;
 
-
-  ProductModulPage({this.productDetail,this.subCatName});
+  ProductModulPage({this.productDetail, this.subCatName});
 
   @override
   _ProductModulPageState createState() => _ProductModulPageState();
@@ -49,12 +48,12 @@ class _ProductModulPageState extends State<ProductModulPage> {
                         bottomLeft: Radius.circular(20),
                         bottomRight: Radius.circular(20),
                       ),
-                      gradient: LinearGradient(
-                        colors: [
-                          Theme.of(context).primaryColor,
-                          Theme.of(context).primaryColor,
-                        ],
-                      ),
+                      // gradient: LinearGradient(
+                      //   colors: [
+                      //     Theme.of(context).primaryColor,
+                      //     Theme.of(context).primaryColor,
+                      //   ],
+                      // ),
                     ),
                     child: FlexibleSpaceBar(
                       centerTitle: true,
@@ -64,14 +63,14 @@ class _ProductModulPageState extends State<ProductModulPage> {
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
-
                                 color: Colors.white,
                                 fontSize: 20.0,
                                 fontWeight: FontWeight.bold,
                               ),
                             )
                           : Text(''),
-                      titlePadding: EdgeInsets.only(left: 60 , right: 30,bottom: 15),
+                      titlePadding:
+                          EdgeInsets.only(left: 60, right: 30, bottom: 15),
                       background: Stack(
                         children: [
                           Container(
@@ -83,15 +82,13 @@ class _ProductModulPageState extends State<ProductModulPage> {
                             width: MediaQuery.of(context).size.width,
                             child: Padding(
                               padding: const EdgeInsets.only(
-                                  top: 50.0, bottom: 30.0 ),
+                                  top: 50.0, bottom: 30.0),
                               child: Hero(
                                 tag: widget.productDetail.id,
                                 child: Image(
-
                                   height: 150,
                                   fit: BoxFit.fill,
                                   image: NetworkImage(
-
                                       'http://ora.hashtagweb.online' +
                                           widget.productDetail.imageUrl),
                                 ),
@@ -182,17 +179,18 @@ class _ProductModulPageState extends State<ProductModulPage> {
                     Container(
                       height: 100,
                       decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.centerLeft,
-                          end: Alignment.centerRight,
-                          colors: [
-                            Color.fromRGBO(13, 128, 133,0.8),
-                            Color.fromRGBO(13, 128, 133,0.8),
-                          ],
-                        ),
+                        // gradient: LinearGradient(
+                        //   begin: Alignment.centerLeft,
+                        //   end: Alignment.centerRight,
+                        //   colors: [
+                        //     Color.fromRGBO(13, 128, 133,0.8),
+                        //     Color.fromRGBO(13, 128, 133,0.8),
+                        //   ],
+                        // ),
 //            border: Border.all(color: Theme.of(context).primaryColor, width: 3),
                         borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(20), topLeft: Radius.circular(20)),
+                            topRight: Radius.circular(20),
+                            topLeft: Radius.circular(20)),
                       ),
                       padding: const EdgeInsets.all(20.0),
                       child: Column(
@@ -218,7 +216,8 @@ class _ProductModulPageState extends State<ProductModulPage> {
                                         Text(
                                           "/per Unit",
                                           style: TextStyle(
-                                              fontSize: 12.0, color: Colors.white),
+                                              fontSize: 12.0,
+                                              color: Colors.white),
                                         )
                                       ],
                                     ),
@@ -241,9 +240,15 @@ class _ProductModulPageState extends State<ProductModulPage> {
                                   horizontal: 20.0,
                                 ),
                                 onPressed: () {
-                                  List<Cart> carts = Provider.of<CartProvider>(context,listen: false).basketCarts;
-                                  print("purchase"+Provider.of<CartProvider>(context,listen: false).basketCarts.toString());
-
+                                  List<Cart> carts = Provider.of<CartProvider>(
+                                          context,
+                                          listen: false)
+                                      .basketCarts;
+                                  print("purchase" +
+                                      Provider.of<CartProvider>(context,
+                                              listen: false)
+                                          .basketCarts
+                                          .toString());
                                 },
                               ),
                             ],
@@ -252,7 +257,7 @@ class _ProductModulPageState extends State<ProductModulPage> {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(top : 80),
+                      margin: EdgeInsets.only(top: 80),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.only(
@@ -261,7 +266,7 @@ class _ProductModulPageState extends State<ProductModulPage> {
                         ),
                       ),
                       padding: EdgeInsets.all(20),
-                      child: Column (
+                      child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -272,12 +277,11 @@ class _ProductModulPageState extends State<ProductModulPage> {
                           ),
                           const SizedBox(height: 10.0),
                           Text(
-                           widget.productDetail.descriptionEn,
+                            widget.productDetail.descriptionEn,
                             textAlign: TextAlign.justify,
                             style: TextStyle(
                                 fontWeight: FontWeight.w300, fontSize: 14.0),
                           ),
-
                           SizedBox(
                             height: 20,
                           ),
@@ -293,18 +297,24 @@ class _ProductModulPageState extends State<ProductModulPage> {
                   alignment: Alignment.bottomRight,
                   child: FloatingActionButton(
                     onPressed: () {
-                      Cart cartItem = Cart(id: widget.productDetail.id,imageUrl: widget.productDetail.imageUrl
-                      ,engName: widget.productDetail.engName,gerName: widget.productDetail.gerName,quantity: widget.productDetail.quantity,
-                      price: widget.productDetail.price,count: 1);
+                      Cart cartItem = Cart(
+                          id: widget.productDetail.id,
+                          imageUrl: widget.productDetail.imageUrl,
+                          engName: widget.productDetail.engName,
+                          gerName: widget.productDetail.gerName,
+                          quantity: widget.productDetail.quantity,
+                          price: widget.productDetail.price,
+                          count: 1);
 
-                        Provider.of<CartProvider>(context,listen: false).add(cartItem);
+                      Provider.of<CartProvider>(context, listen: false)
+                          .add(cartItem);
 
                       CartModel cartModel = CartModel();
-                      cartModel.carts=[];
+                      cartModel.carts = [];
                       cartModel.carts.add(cartItem);
-                      print("cartModelToBeAdded"+cartModel.toString());
-                      Provider.of<CartProvider>(context,listen: false).saveCart();
-
+                      print("cartModelToBeAdded" + cartModel.toString());
+                      Provider.of<CartProvider>(context, listen: false)
+                          .saveCart();
                     },
                     backgroundColor: Theme.of(context).primaryColor,
                     child: Icon(
@@ -318,11 +328,6 @@ class _ProductModulPageState extends State<ProductModulPage> {
           ),
         ),
       ),
-
     );
   }
 }
-
-
-
-

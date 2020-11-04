@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -155,8 +156,9 @@ class API {
     var url = newBaseUrl + "/prosthetic/getCats";
     return http.get(url);
   }
+
   Future<UserModel> register(RegisterBody registerBody) async {
-    final String apiUrl = newBaseUrl+"/register";
+    final String apiUrl = newBaseUrl + "/register";
     final response = await http.post(apiUrl, body: {
       "first_name": registerBody.firstName,
       "last_name": registerBody.lastName,
@@ -184,18 +186,18 @@ class API {
     }
   }
 
-  Future getProsData(String id , int page) async{
-    String url = Uri.encodeFull(
-        newBaseUrl+'/prosthetic/getByCat/$id?page=$page');
-    print("api url"+ url);
+  Future getProsData(String id, int page) async {
+    String url =
+        Uri.encodeFull(newBaseUrl + '/prosthetic/getByCat/$id?page=$page');
+    print("api url" + url);
     http.Response response = await http.get(url);
     return response;
   }
 
-  Future<SuccessResponse> addAddress(AddAddressBody addAddressBody ,String token) async {
-    final String apiUrl = newBaseUrl+"/address/store";
+  Future<SuccessResponse> addAddress(
+      AddAddressBody addAddressBody, String token) async {
+    final String apiUrl = newBaseUrl + "/address/store";
     final response = await http.post(apiUrl, body: {
-
       "address_line1": addAddressBody.address1,
       "address_line2": addAddressBody.address2,
       "country": addAddressBody.country,
@@ -204,7 +206,7 @@ class API {
       "state": addAddressBody.state,
       "phone": addAddressBody.addressPhone,
       "additional_info": addAddressBody.additionalInfo
-    },headers: {
+    }, headers: {
       HttpHeaders.authorizationHeader: 'Bearer $token',
     });
 
@@ -218,10 +220,13 @@ class API {
     }
   }
 
-
-  Future<SuccessResponse> deleteAddress(int id ,String token) async {
-    final String apiUrl = newBaseUrl+"/address/delete/$id";
-    final response = await http.post(apiUrl);
+  Future<SuccessResponse> deleteAddress(int id, String token) async {
+    final String apiUrl = newBaseUrl + '/address/delete/+$id';
+    final response = await http.post('$apiUrl', headers: {
+      HttpHeaders.contentTypeHeader: 'application/json',
+      HttpHeaders.ACCEPT: 'application/json',
+      HttpHeaders.authorizationHeader: 'Bearer $token',
+    });
 
     if (response.statusCode == 200) {
       debugPrint('responsetest: ${response.statusCode.toString()}');
@@ -233,4 +238,30 @@ class API {
     }
   }
 
+  Future<SuccessResponse> editAddress(
+      int id, String token, AddAddressBody addressInfo) async {
+    final String apiUrl = newBaseUrl + "/address/update/+$id";
+    final body = jsonEncode({
+      "country": addressInfo.country,
+      "city": addressInfo.city,
+      "phone": addressInfo.addressPhone,
+      "zip_code": addressInfo.zipCode,
+      "address_line1": addressInfo.address1
+    });
+    final response = await http.post(apiUrl,
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+        body: body);
+    if (response.statusCode == 200) {
+      final String responseFormJson = response.body;
+      debugPrint('responsetest: ${response.statusCode.toString()}');
+      return successResponseFromJson(responseFormJson);
+    } else {
+      debugPrint('Wrooooong: ${response.statusCode.toString()}');
+      return null;
+    }
+  }
 }

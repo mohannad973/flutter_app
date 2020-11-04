@@ -4,7 +4,6 @@ import 'package:ora_app/Models/StringSuccessResponse.dart';
 import 'package:ora_app/Utils/form_validators.dart';
 import 'package:ora_app/reset_password.dart';
 import 'package:ora_app/sign_in.dart';
-import 'file:///E:/hashtag%20progects/ora-master/lib/register/sign_up.dart';
 
 import 'Network/API.dart';
 import 'Utils/decorations.dart';

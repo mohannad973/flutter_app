@@ -102,17 +102,18 @@ class _ProductsState extends State<Products> {
                                       color: Color.fromARGB(200, 0, 0, 0),
                                     ),
                                   ],
-                                  gradient: LinearGradient(
-                                    colors: [
-                                      Theme.of(context).primaryColor,
-                                      Theme.of(context).primaryColor,
-                                    ],
-                                  ),
+                                  // gradient: LinearGradient(
+                                  //   colors: [
+                                  //     Theme.of(context).primaryColor,
+                                  //     Theme.of(context).primaryColor,
+                                  //   ],
+                                  // ),
                                 ),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(20.0),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: <Widget>[
                                       Stack(
                                         children: <Widget>[
@@ -125,7 +126,8 @@ class _ProductsState extends State<Products> {
                                             ),
                                           ),
                                           Hero(
-                                            tag: snapshot.data.products[index].id,
+                                            tag: snapshot
+                                                .data.products[index].id,
                                             child: Container(
                                               // margin: EdgeInsets.all(15),
                                               child: ClipRRect(
@@ -151,9 +153,12 @@ class _ProductsState extends State<Products> {
                                       ),
                                       Flexible(
                                         child: Container(
-                                          width: MediaQuery.of(context).size.width *
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
                                               0.9,
-                                          padding: EdgeInsets.fromLTRB(10, 5, 0, 0),
+                                          padding:
+                                              EdgeInsets.fromLTRB(10, 5, 0, 0),
                                           child: Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
@@ -162,23 +167,28 @@ class _ProductsState extends State<Products> {
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
                                                 mainAxisAlignment:
-                                                    MainAxisAlignment.spaceEvenly,
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
                                                 children: <Widget>[
                                                   Container(
-                                                    padding:
-                                                        EdgeInsets.only(left: 10),
-                                                    width: MediaQuery.of(context)
-                                                            .size
-                                                            .width *
-                                                        0.7,
+                                                    padding: EdgeInsets.only(
+                                                        left: 10),
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            0.7,
                                                     child: Text(
-                                                      snapshot.data.products[index]
+                                                      snapshot
+                                                          .data
+                                                          .products[index]
                                                           .engName,
                                                       maxLines: 1,
                                                       overflow:
                                                           TextOverflow.ellipsis,
                                                       style: TextStyle(
-                                                        fontWeight: FontWeight.bold,
+                                                        fontWeight:
+                                                            FontWeight.bold,
                                                         fontSize: 15,
                                                         color: Theme.of(context)
                                                             .accentColor,
@@ -186,15 +196,16 @@ class _ProductsState extends State<Products> {
                                                     ),
                                                   ),
                                                   Container(
-                                                    padding:
-                                                        EdgeInsets.only(left: 10),
+                                                    padding: EdgeInsets.only(
+                                                        left: 10),
                                                     child: Text(
                                                       widget.subCatName,
                                                       maxLines: 1,
                                                       overflow:
                                                           TextOverflow.ellipsis,
                                                       style: TextStyle(
-                                                        fontWeight: FontWeight.bold,
+                                                        fontWeight:
+                                                            FontWeight.bold,
                                                         fontSize: 15,
                                                         color: Theme.of(context)
                                                             .accentColor,
@@ -205,16 +216,18 @@ class _ProductsState extends State<Products> {
                                               ),
                                               Column(
                                                 mainAxisAlignment:
-                                                    MainAxisAlignment.spaceEvenly,
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
                                                 children: <Widget>[
                                                   Text(
-                                                    snapshot
-                                                        .data.products[index].price
+                                                    snapshot.data
+                                                        .products[index].price
                                                         .toString(),
                                                     style: TextStyle(
                                                       color: Theme.of(context)
                                                           .accentColor,
-                                                      fontWeight: FontWeight.bold,
+                                                      fontWeight:
+                                                          FontWeight.bold,
                                                     ),
                                                   ),
                                                 ],
@@ -229,11 +242,10 @@ class _ProductsState extends State<Products> {
                               ),
                             ),
                             Container(
-                                margin: EdgeInsets.only(left: 20,right: 20),
+                                margin: EdgeInsets.only(left: 20, right: 20),
                                 child: SizedBox(
                                   height: 10,
-                                )
-                            ),
+                                )),
                           ],
                         );
                       });
@@ -279,18 +291,18 @@ class _ProductsState extends State<Products> {
                   color: Color.fromARGB(200, 0, 0, 0),
                 ),
               ],
-              gradient: LinearGradient(
-                colors: [
-                  Color.fromRGBO(85, 58, 109, 1),
-                  Color.fromRGBO(183, 155, 207, 1),
-//                            Color.fromRGBO(39, 92, 93, 1),
-//                            Color.fromRGBO(126, 184, 186, 1)
-                ],
-                begin: const FractionalOffset(0.0, 0.0),
-                end: const FractionalOffset(0.5, 0.0),
-                stops: [0.0, 1.0],
-                tileMode: TileMode.clamp,
-              ),
+//               gradient: LinearGradient(
+//                 colors: [
+//                   Color.fromRGBO(85, 58, 109, 1),
+//                   Color.fromRGBO(183, 155, 207, 1),
+// //                            Color.fromRGBO(39, 92, 93, 1),
+// //                            Color.fromRGBO(126, 184, 186, 1)
+//                 ],
+//                 begin: const FractionalOffset(0.0, 0.0),
+//                 end: const FractionalOffset(0.5, 0.0),
+//                 stops: [0.0, 1.0],
+//                 tileMode: TileMode.clamp,
+//               ),
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20.0),

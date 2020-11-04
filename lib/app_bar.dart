@@ -23,7 +23,6 @@ Widget barWithBack(BuildContext context) {
   return IconButton(
     icon: Icon(Icons.arrow_back_ios, color: Colors.white),
     onPressed: () => Navigator.of(context).pop(),
-
   );
 }
 
@@ -37,14 +36,12 @@ Widget barWithAdd(BuildContext context) {
   );
 }
 
-Widget barWithSearch(BuildContext context){
-  return   IconButton(
+Widget barWithSearch(BuildContext context) {
+  return IconButton(
     onPressed: () {
       Navigator.push(
         context,
-        MaterialPageRoute(
-            builder: (context) => Filter(
-            )),
+        MaterialPageRoute(builder: (context) => Filter()),
       );
     },
     icon: Icon(
@@ -54,22 +51,23 @@ Widget barWithSearch(BuildContext context){
   );
 }
 
-
-Widget topBar(BuildContext context, Widget leading, Widget title,Widget action) {
+Widget topBar(
+    BuildContext context, Widget leading, Widget title, Widget action) {
   return PreferredSize(
     preferredSize: Size.fromHeight(50),
     child: ClipRRect(
-      borderRadius: BorderRadius.only(bottomRight: Radius.circular(20) , bottomLeft: Radius.circular(20)),
+      borderRadius: BorderRadius.only(
+          bottomRight: Radius.circular(20), bottomLeft: Radius.circular(20)),
       child: GradientAppBar(
-        title: title ,
-        gradient: LinearGradient(
-          colors: [
-            Theme.of(context).primaryColor,
-            Theme.of(context).primaryColor,
-          ],
-        ),
+        title: title,
+        // gradient: LinearGradient(
+        //   colors: [
+        //     Theme.of(context).primaryColor,
+        //     Theme.of(context).primaryColor,
+        //   ],
+        // ),
         actions: <Widget>[
-         action,
+          action,
         ],
         leading: leading,
       ),

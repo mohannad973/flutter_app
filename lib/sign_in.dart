@@ -8,14 +8,12 @@ import 'package:ora_app/forget_password_screen.dart';
 import 'package:ora_app/home_page.dart';
 import 'package:ora_app/register/register.dart';
 import 'Providers/countries_providers.dart';
-import 'file:///E:/hashtag%20progects/ora-master/lib/register/sign_up.dart';
 import 'package:provider/provider.dart';
 import 'Models/userModel.dart';
 import 'Utils/form_validators.dart';
 import 'bottom_navigation_bar.dart';
 import 'Utils/decorations.dart';
 import 'package:http/http.dart' as http;
-
 
 class SignIn extends StatefulWidget {
   final Function toggleView;
@@ -27,7 +25,6 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
-
   String email = '';
   String password = '';
   String error = '';
@@ -35,7 +32,6 @@ class _SignInState extends State<SignIn> {
 //  bool loading = false;
   var mainProvider;
   final _logInFormKey = GlobalKey<FormState>();
-
 
   BuildContext scaffoldContext;
 
@@ -55,7 +51,8 @@ class _SignInState extends State<SignIn> {
         actions: [
           FlatButton.icon(
             onPressed: () {
-              Provider.of<CountryProvider>(context,listen: false).getCountries();
+              Provider.of<CountryProvider>(context, listen: false)
+                  .getCountries();
 
               Navigator.push(
                 context,
@@ -124,9 +121,8 @@ class _SignInState extends State<SignIn> {
                       obscureText: true,
                       onChanged: (val) {
                         setState(() => password = val);
-
                       },
-                        onSaved: (passwordValue)=> password = passwordValue,
+                      onSaved: (passwordValue) => password = passwordValue,
                     ),
                     SizedBox(
                       height: 20,
@@ -150,7 +146,8 @@ class _SignInState extends State<SignIn> {
                                         borderRadius:
                                             BorderRadius.circular(10.0)),
                                     onPressed: () async {
-                                      if (_logInFormKey.currentState.validate()) {
+                                      if (_logInFormKey.currentState
+                                          .validate()) {
                                         final String email =
                                             emailController.text.trim();
                                         final String password =
@@ -160,11 +157,12 @@ class _SignInState extends State<SignIn> {
                                                     context,
                                                     listen: false)
                                                 .logIn(email, password);
-                                        SessionManager session = SessionManager();
+                                        SessionManager session =
+                                            SessionManager();
                                         String t = await session.getAuthToken();
 
                                         if (user) {
-                                          print("token test : "+t);
+                                          print("token test : " + t);
 
                                           Navigator.pushReplacement(
                                             context,
@@ -201,7 +199,8 @@ class _SignInState extends State<SignIn> {
                                   'Forgot your Password?',
                                   maxLines: 1,
                                   style: TextStyle(
-                                      color: Theme.of(context).primaryColor,fontSize: 10),
+                                      color: Theme.of(context).primaryColor,
+                                      fontSize: 10),
                                 ),
                               ),
                             ),

@@ -6,7 +6,6 @@ import 'package:ora_app/Models/rigesterBody.dart';
 import 'package:ora_app/home_page.dart';
 import 'package:ora_app/profile.dart';
 import 'package:ora_app/sign_in.dart';
-import 'file:///E:/hashtag%20progects/ora-master/lib/register/sign_up.dart';
 import 'My_Addresses.dart';
 import 'Network/API.dart';
 import 'app_bar.dart';
@@ -141,15 +140,16 @@ class _ResetPasswordState extends State<ResetPassword> {
                             codeController.text.toLowerCase().trim(),
                             widget.email,
                             newPasswordController.text.trim());
-                        if(response == null){
+                        if (response == null) {
                           _showSnackBar("error resetting the password");
-                        }else{
+                        } else {
                           _showSnackBar("Your Password have been changed");
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => SignIn()),
-                        );
-                      }},
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => SignIn()),
+                          );
+                        }
+                      },
                       child: Text('Reset'),
                       textColor: Colors.white,
                     ),

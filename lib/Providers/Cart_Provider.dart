@@ -62,7 +62,6 @@ class CartProvider with ChangeNotifier {
     if (index == -1) {
       _cartList[index].count = count;
       _totalPrice = _totalPrice + cartItem.price;
-
     } else {
       _cartList[index].count += count;
       _totalPrice = _totalPrice + cartItem.price;
@@ -76,7 +75,6 @@ class CartProvider with ChangeNotifier {
     if (index == -1) {
       _cartList[index].count = count;
       _totalPrice = _totalPrice - cartItem.price;
-
     } else {
       _cartList[index].count += count;
       _totalPrice = _totalPrice - cartItem.price;

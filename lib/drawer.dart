@@ -26,7 +26,7 @@ class _DrawerViewState extends State<DrawerView> {
     DrawerItems(
         icon: Icon(
           MyFlutterApp.tooth,
-          color:Colors.black87,
+          color: Colors.black87,
         ),
         name: 'IMPLANTS'),
     DrawerItems(
@@ -44,7 +44,7 @@ class _DrawerViewState extends State<DrawerView> {
     DrawerItems(
         icon: Icon(
           Icons.system_update_alt,
-          color:Colors.black87,
+          color: Colors.black87,
         ),
         name: 'ENDO SYSTEM'),
     DrawerItems(
@@ -56,7 +56,7 @@ class _DrawerViewState extends State<DrawerView> {
     DrawerItems(
         icon: Icon(
           Icons.contact_phone,
-          color:Colors.black87,
+          color: Colors.black87,
         ),
         name: 'CONTACT US'),
     DrawerItems(
@@ -73,8 +73,8 @@ class _DrawerViewState extends State<DrawerView> {
       width: 300,
       height: MediaQuery.of(context).size.height,
       child: ClipRRect(
-        borderRadius: BorderRadius.only(topRight: Radius.circular(20) , bottomRight: Radius.circular(20
-        )),
+        borderRadius: BorderRadius.only(
+            topRight: Radius.circular(20), bottomRight: Radius.circular(20)),
         child: Drawer(
           elevation: 1,
           child: Column(
@@ -83,17 +83,17 @@ class _DrawerViewState extends State<DrawerView> {
                 height: MediaQuery.of(context).size.height * 0.3,
 //              color: Theme.of(context).primaryColor,
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      Colors.black87,
-                      Colors.black87
-                    ],
-                    begin: const FractionalOffset(0.0, 0.0),
-                    end: const FractionalOffset(0.5, 0.0),
-                    stops: [0.0, 1.0],
-                    tileMode: TileMode.clamp,
-                  ),
-                ),
+                    // gradient: LinearGradient(
+                    //   colors: [
+                    //     Colors.black87,
+                    //     Colors.black87
+                    //   ],
+                    //   begin: const FractionalOffset(0.0, 0.0),
+                    //   end: const FractionalOffset(0.5, 0.0),
+                    //   stops: [0.0, 1.0],
+                    //   tileMode: TileMode.clamp,
+                    // ),
+                    ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -154,8 +154,8 @@ class _DrawerViewState extends State<DrawerView> {
                           //       ),
                           //     );
                           // }
-                           Navigator.pop(context);
-                          print ('/' + value.name);
+                          Navigator.pop(context);
+                          print('/' + value.name);
                           Navigator.pushNamed(context, '/' + value.name);
 //                        Navigator.push(context, MaterialPageRoute(builder: (context) => SignIn(),));
                         },
