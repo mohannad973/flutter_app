@@ -19,9 +19,9 @@ class CategoryItem extends StatefulWidget {
 class _CategoryItemState extends State<CategoryItem> {
   @override
   Widget build(BuildContext context) {
-    if(widget.selectedIndex == null){
-      widget.selectedIndex =0;
-    }
+    // if(widget.selectedIndex == null){
+    //   widget.selectedIndex =0;
+    // }
     return GestureDetector(
       onTap: widget.press,
       child: Padding(

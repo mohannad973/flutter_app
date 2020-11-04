@@ -8,6 +8,8 @@ import 'package:ora_app/Providers/citiesProvider.dart';
 import 'package:ora_app/Providers/countries_providers.dart';
 import 'package:ora_app/Providers/diameters_provider.dart';
 import 'package:ora_app/Providers/dias_info_provider.dart';
+import 'package:ora_app/Providers/endo_cats_provider.dart';
+import 'package:ora_app/Providers/endo_products_provider.dart';
 import 'package:ora_app/Providers/get_subCats_provider.dart';
 import 'package:ora_app/Providers/implants_provider.dart';
 import 'package:ora_app/Providers/login_provider.dart';
@@ -79,6 +81,8 @@ Future<void> main() async {
       ChangeNotifierProvider<ProsProvider>(create: (_) => ProsProvider()),
       ChangeNotifierProvider<ProsDataProvider>(create: (_) => ProsDataProvider()),
       ChangeNotifierProvider<AddAddressProvider>(create: (_) => AddAddressProvider()),
+      ChangeNotifierProvider<EndoProductsProvider>(create: (_) => EndoProductsProvider()),
+      ChangeNotifierProvider<EndoCatsProvider>(create: (_) => EndoCatsProvider()),
     ],
     child: MaterialApp(
       debugShowCheckedModeBanner: false,
