@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:ora_app/Models/cartModel.dart';
 import 'package:ora_app/Models/endo_products_response.dart';
+import 'package:ora_app/Providers/Cart_Provider.dart';
 import 'package:ora_app/Utils/app_url.dart';
+import 'package:provider/provider.dart';
 
 class EndoPageBody extends StatefulWidget {
   EndoProduct endoProduct;
@@ -39,12 +42,24 @@ class _EndoPageBodyState extends State<EndoPageBody> {
                 ),
               )),
           Container(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                widget.endoProduct.engName,
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-              ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    widget.endoProduct.engName,
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    '\$' + widget.endoProduct.price.toString(),
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
             ),
           ),
           Padding(
@@ -61,20 +76,41 @@ class _EndoPageBodyState extends State<EndoPageBody> {
             height: 30,
           ),
           Center(
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.black,
-                borderRadius: BorderRadius.all(Radius.circular(15))
+            child: GestureDetector(
+              onTap: () {
+                Cart cartItem = Cart(
+                    id: widget.endoProduct.id,
+                    imageUrl: widget.endoProduct.image,
+                    engName: widget.endoProduct.engName,
+                    gerName: widget.endoProduct.gerName,
+                    price: widget.endoProduct.price,
+                    count: 1);
+
+                Provider.of<CartProvider>(context, listen: false).add(cartItem);
+
+                CartModel cartModel = CartModel();
+                cartModel.carts = [];
+                cartModel.carts.add(cartItem);
+
+                Provider.of<CartProvider>(context, listen: false).saveCart();
+                Scaffold.of(context).showSnackBar(SnackBar(
+                  content: Text("Product Added To cart"),
+                ));
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.all(Radius.circular(15))),
+                // color: Colors.black,
+                width: size.width * 0.6,
+                height: 40,
+                margin: EdgeInsets.only(bottom: 20),
+                child: Center(
+                    child: Text(
+                  "Add To Cart",
+                  style: TextStyle(color: Colors.white),
+                )),
               ),
-             // color: Colors.black,
-              width: size.width * 0.6,
-              height: 40,
-              margin: EdgeInsets.only(bottom: 20),
-              child: Center(
-                  child: Text(
-                "Add To Cart",
-                style: TextStyle(color: Colors.white),
-              )),
             ),
           )
         ],

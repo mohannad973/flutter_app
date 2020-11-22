@@ -42,7 +42,8 @@ class SessionManager {
     final SharedPreferences pref = await SharedPreferences.getInstance();
     CartModel cart = CartModel();
     String stringCart;
-    stringCart = pref.getString(this.cart) ?? 'null';
+    stringCart =
+        pref.getString(this.cart) != null ? pref.getString(this.cart) : "";
     cart = cartFromJson(stringCart);
     return cart;
   }

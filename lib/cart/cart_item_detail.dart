@@ -5,12 +5,10 @@ import 'package:ora_app/Utils/app_url.dart';
 import 'package:provider/provider.dart';
 
 class CartItemDetail extends StatefulWidget {
-
   Cart cartItem;
-  final Function () detectListItem;
+  final Function() detectListItem;
 
-
-  CartItemDetail({this.cartItem,@required this.detectListItem });
+  CartItemDetail({this.cartItem, @required this.detectListItem});
 
   @override
   _CartItemDetailState createState() => _CartItemDetailState();
@@ -20,7 +18,6 @@ class _CartItemDetailState extends State<CartItemDetail> {
   int counter = 1;
   int price;
 
-
   void incrementCounter() {
     setState(() {
       if (counter == 99) {
@@ -29,10 +26,10 @@ class _CartItemDetailState extends State<CartItemDetail> {
 
       setState(() {
         counter++;
-        price = widget.cartItem.price*counter;
+        price = widget.cartItem.price * counter;
       });
-       Provider.of<CartProvider>(context,listen: false).modifyIncrease(widget.cartItem,counter);
-
+      Provider.of<CartProvider>(context, listen: false)
+          .modifyIncrease(widget.cartItem, counter);
     });
   }
 
@@ -44,22 +41,21 @@ class _CartItemDetailState extends State<CartItemDetail> {
 
       setState(() {
         counter--;
-        price = widget.cartItem.price*counter;
+        price = widget.cartItem.price * counter;
       });
-       Provider.of<CartProvider>(context,listen: false).modifyDecrease(widget.cartItem,counter);
+      Provider.of<CartProvider>(context, listen: false)
+          .modifyDecrease(widget.cartItem, counter);
     });
   }
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     price = widget.cartItem.price;
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -71,7 +67,7 @@ class _CartItemDetailState extends State<CartItemDetail> {
               image: DecorationImage(
                   fit: BoxFit.fill,
                   image: NetworkImage(
-                      (AppUrl.imageUrl+  widget.cartItem.imageUrl)  ))),
+                      (AppUrl.imageUrl + widget.cartItem.imageUrl)))),
         ),
         Container(
           margin: EdgeInsets.only(left: 15),
@@ -87,7 +83,7 @@ class _CartItemDetailState extends State<CartItemDetail> {
                 height: 20,
               ),
               Text(
-                price.toString()+'\$',
+                price.toString() + '\$',
                 style: TextStyle(fontSize: 24),
               ),
             ],
@@ -124,7 +120,7 @@ class _CartItemDetailState extends State<CartItemDetail> {
                   Container(
                       margin: EdgeInsets.only(left: 6, right: 6),
                       child: Text(
-                        '${counter}',
+                        '$counter',
                         style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),
                       )),
@@ -149,9 +145,18 @@ class _CartItemDetailState extends State<CartItemDetail> {
         ),
         Spacer(),
         Padding(
-          padding: const EdgeInsets.only(right: 15,),
+          padding: const EdgeInsets.only(
+            right: 15,
+          ),
           child: GestureDetector(
-            onTap: widget.detectListItem,
+            onTap: () {
+              print('this is the couuuunterrr $counter');
+              widget.detectListItem();
+
+              setState(() {
+                print('counter is' + counter.toString());
+              });
+            },
             child: Icon(
               Icons.delete,
               color: Color(0xFFc90225),

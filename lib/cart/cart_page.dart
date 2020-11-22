@@ -16,25 +16,21 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
-
-
   deleteItem(int index) {
-
     setState(() {
-      Provider.of<CartProvider>(context,listen: false).removeAtIndex(index);
+      Provider.of<CartProvider>(context, listen: false).removeAtIndex(index);
     });
-
   }
 
-  _getCartFromCash() async{
-    await Provider.of<CartProvider>(context,listen: false).getCart();
+  _getCartFromCash() async {
+    await Provider.of<CartProvider>(context, listen: false).getCart();
   }
 
   @override
-  void initState()  {
+  void initState() {
     super.initState();
 
-     _getCartFromCash();
+    _getCartFromCash();
   }
 
   @override
@@ -81,7 +77,8 @@ class _CartPageState extends State<CartPage> {
                                   Icons.shopping_cart,
                                   color: Colors.black,
                                   size: 24.0,
-                                  semanticLabel: 'Text to announce in accessibility modes',
+                                  semanticLabel:
+                                      'Text to announce in accessibility modes',
                                 ),
                               ],
                             ),
@@ -93,7 +90,8 @@ class _CartPageState extends State<CartPage> {
                               )),
                           Expanded(
                             child: ListView.builder(
-                              itemCount: Provider.of<CartProvider>(context).count,
+                              itemCount:
+                                  Provider.of<CartProvider>(context).count,
                               itemBuilder: (context, index) {
                                 return Column(
                                   children: [
@@ -102,19 +100,18 @@ class _CartPageState extends State<CartPage> {
                                         left: 20,
                                       ),
                                       child: CartItemDetail(
-                                        cartItem: Provider.of<CartProvider>(context)
-                                            .basketCarts[index],
+                                        cartItem:
+                                            Provider.of<CartProvider>(context)
+                                                .basketCarts[index],
                                         detectListItem: () => deleteItem(index),
                                       ),
-
-
                                     ),
                                     Container(
-                                        margin: EdgeInsets.only(left: 20,right: 20),
+                                        margin: EdgeInsets.only(
+                                            left: 20, right: 20),
                                         child: Divider(
-                                          thickness:2,
-                                        )
-                                    ),
+                                          thickness: 2,
+                                        )),
                                   ],
                                 );
                               },
@@ -126,29 +123,43 @@ class _CartPageState extends State<CartPage> {
                   ],
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 5,right: 5,left: 5),
+                  padding: const EdgeInsets.only(bottom: 5, right: 5, left: 5),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
                       children: [
                         Container(
-                          child: Center(child: Text("Total : "+Provider.of<CartProvider>(context).totalPrice.toString()+" \$",style: TextStyle(fontSize: 20,color: Colors.black),)),
+                          child: Center(
+                              child: Text(
+                            "Total : " +
+                                Provider.of<CartProvider>(context)
+                                    .totalPrice
+                                    .toString() +
+                                " \$",
+                            style: TextStyle(fontSize: 20, color: Colors.black),
+                          )),
                           color: Colors.white,
                           height: 50,
-                          width: MediaQuery.of(context).size.width*0.45,
+                          width: MediaQuery.of(context).size.width * 0.45,
                         ),
                         GestureDetector(
-                          onTap: (){
-                            Navigator.push(context, SlideRightRoute(page: ProceedPayment()));
+                          onTap: () {
+                            Navigator.push(context,
+                                SlideRightRoute(page: ProceedPayment()));
                           },
                           child: Container(
-                            child: Center(child: Text("Check Out",style: TextStyle(fontSize: 20,color: Colors.white),)),
-                            color: Theme.of(context).primaryColor.withOpacity(0.7),
+                            child: Center(
+                                child: Text(
+                              "Check Out",
+                              style:
+                                  TextStyle(fontSize: 20, color: Colors.white),
+                            )),
+                            color:
+                                Theme.of(context).primaryColor.withOpacity(0.7),
                             height: 50,
-                            width: MediaQuery.of(context).size.width*0.48,
+                            width: MediaQuery.of(context).size.width * 0.48,
                           ),
                         ),
-
                       ],
                     ),
                   ),

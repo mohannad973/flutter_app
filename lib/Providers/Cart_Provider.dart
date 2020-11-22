@@ -59,10 +59,12 @@ class CartProvider with ChangeNotifier {
 
   void modifyIncrease(Cart cartItem, int count) {
     int index = contains(cartItem);
+    print(index);
     if (index == -1) {
       _cartList[index].count = count;
       _totalPrice = _totalPrice + cartItem.price;
     } else {
+      // print(count);
       _cartList[index].count += count;
       _totalPrice = _totalPrice + cartItem.price;
     }
@@ -72,11 +74,13 @@ class CartProvider with ChangeNotifier {
 
   void modifyDecrease(Cart cartItem, int count) {
     int index = contains(cartItem);
+    print(index);
     if (index == -1) {
       _cartList[index].count = count;
       _totalPrice = _totalPrice - cartItem.price;
     } else {
       _cartList[index].count += count;
+      // print(count);
       _totalPrice = _totalPrice - cartItem.price;
     }
     this.saveCart();

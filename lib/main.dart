@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:ora_app/Providers/Cart_Provider.dart';
 import 'package:ora_app/Providers/add_address_provider.dart';
 import 'package:ora_app/Providers/categories_provider.dart';
@@ -18,6 +19,7 @@ import 'package:ora_app/Providers/pros_cat_provider.dart';
 import 'package:ora_app/Providers/pros_data_provider.dart';
 import 'package:ora_app/Providers/register_provider.dart';
 import 'package:ora_app/Util/session_manager.dart';
+import 'package:ora_app/app_localizations.dart';
 import 'package:ora_app/bottom_navigation_bar.dart';
 import 'package:ora_app/cart.dart';
 import 'package:ora_app/catalogue.dart';
@@ -49,7 +51,6 @@ import 'landingPage/landing_page.dart';
 import 'my_orders/my_orders.dart';
 
 Future<void> main() async {
-
   SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(statusBarColor: Color(0xFF000000)));
   WidgetsFlutterBinding.ensureInitialized();
@@ -64,7 +65,8 @@ Future<void> main() async {
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider<LogInProvider>(create: (_) => LogInProvider()),
-      ChangeNotifierProvider<RegisterProvider>(create: (_) => RegisterProvider()),
+      ChangeNotifierProvider<RegisterProvider>(
+          create: (_) => RegisterProvider()),
       ChangeNotifierProvider<CountryProvider>(create: (_) => CountryProvider()),
       ChangeNotifierProvider<CitiesProvider>(create: (_) => CitiesProvider()),
       ChangeNotifierProvider<ChangePasswordProvider>(
@@ -75,14 +77,20 @@ Future<void> main() async {
           create: (context) => CategoriesProvider()),
       ChangeNotifierProvider<CartProvider>(create: (context) => CartProvider()),
       ChangeNotifierProvider<ImplantProvider>(create: (_) => ImplantProvider()),
-      ChangeNotifierProvider<DiametersProvider>(create: (_) => DiametersProvider()),
-      ChangeNotifierProvider<DiasInfoProvider>(create: (_) => DiasInfoProvider()),
+      ChangeNotifierProvider<DiametersProvider>(
+          create: (_) => DiametersProvider()),
+      ChangeNotifierProvider<DiasInfoProvider>(
+          create: (_) => DiasInfoProvider()),
       ChangeNotifierProvider<ProfileProvider>(create: (_) => ProfileProvider()),
       ChangeNotifierProvider<ProsProvider>(create: (_) => ProsProvider()),
-      ChangeNotifierProvider<ProsDataProvider>(create: (_) => ProsDataProvider()),
-      ChangeNotifierProvider<AddAddressProvider>(create: (_) => AddAddressProvider()),
-      ChangeNotifierProvider<EndoProductsProvider>(create: (_) => EndoProductsProvider()),
-      ChangeNotifierProvider<EndoCatsProvider>(create: (_) => EndoCatsProvider()),
+      ChangeNotifierProvider<ProsDataProvider>(
+          create: (_) => ProsDataProvider()),
+      ChangeNotifierProvider<AddAddressProvider>(
+          create: (_) => AddAddressProvider()),
+      ChangeNotifierProvider<EndoProductsProvider>(
+          create: (_) => EndoProductsProvider()),
+      ChangeNotifierProvider<EndoCatsProvider>(
+          create: (_) => EndoCatsProvider()),
     ],
     child: MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -91,6 +99,26 @@ Future<void> main() async {
         accentColor: Colors.white,
         cardColor: Color(0xFF000000),
       ),
+      supportedLocales: [
+        Locale('en', 'US'),
+        Locale('de', 'DD'),
+      ],
+      localizationsDelegates: [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      localeResolutionCallback: (locale, supportedLocales) {
+        for (var supportedLocale in supportedLocales) {
+          if (supportedLocale.languageCode == locale.languageCode &&
+              supportedLocale.countryCode == locale.countryCode) {
+            return supportedLocale;
+          }
+        }
+        // If the locale of the device is not supported, use the first one
+        // from the list (English, in this case).
+        return supportedLocales.first;
+      },
       initialRoute: '/',
       routes: {
         '/': (context) => value ? LandingPage() : BottomBar(),

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:ora_app/Providers/login_provider.dart';
 import 'package:ora_app/Util/session_manager.dart';
 import 'package:ora_app/Utils/Constants.dart';
+import 'package:ora_app/app_localizations.dart';
 import 'package:ora_app/forget_password_screen.dart';
 import 'package:ora_app/home_page.dart';
 import 'package:ora_app/register/register.dart';
@@ -182,29 +183,29 @@ class _SignInState extends State<SignIn> {
                                     textColor: Colors.white,
                                   ),
                                 ),
-                          Container(
-                            width: MediaQuery.of(context).size.width * 0.5,
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 20),
-                              child: FlatButton(
-                                onPressed: () => {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => ForgetPassword(),
-                                      ))
-                                },
-                                color: Colors.transparent,
-                                child: AutoSizeText(
-                                  'Forgot your Password?',
-                                  maxLines: 1,
-                                  style: TextStyle(
-                                      color: Theme.of(context).primaryColor,
-                                      fontSize: 10),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 20),
+                            child: FlatButton(
+                              onPressed: () => {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ForgetPassword(),
+                                    ))
+                              },
+                              color: Colors.transparent,
+                              child: AutoSizeText(
+                                AppLocalizations.of(context)
+                                    .translate('forgot_passowrd'),
+                                maxLines: 1,
+                                style: TextStyle(
+                                  color: Theme.of(context).primaryColor,
+                                  fontSize:
+                                      MediaQuery.of(context).size.width / 30,
                                 ),
                               ),
                             ),
-                          ),
+                          )
                         ],
                       ),
                     ),

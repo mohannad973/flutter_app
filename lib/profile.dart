@@ -6,6 +6,8 @@ import 'package:ora_app/Providers/register_provider.dart';
 import 'package:ora_app/change_password.dart';
 import 'package:ora_app/existing_cards.dart';
 import 'package:ora_app/proceed_payment.dart';
+import 'package:ora_app/register/register.dart';
+import 'package:ora_app/sign_in.dart';
 import 'package:provider/provider.dart';
 import 'Models/profile_response_model.dart';
 import 'Providers/profile_provider.dart';
@@ -14,8 +16,6 @@ import 'app_bar.dart';
 import 'bottom_navigation_bar.dart';
 
 class Profile extends StatefulWidget {
-
-
   @override
   _ProfileState createState() => _ProfileState();
 }
@@ -26,17 +26,18 @@ class _ProfileState extends State<Profile> {
   User user = User();
   String token;
 
-  String _getToken()  {
-    if(Provider.of<LogInProvider>(context).token != null){
+  String _getToken() {
+    if (Provider.of<LogInProvider>(context).token != null) {
       token = Provider.of<LogInProvider>(context).token;
     }
-    if(Provider.of<RegisterProvider>(context).token != null){
+    if (Provider.of<RegisterProvider>(context).token != null) {
       token = Provider.of<RegisterProvider>(context).token;
     }
-     if(Provider.of<LogInProvider>(context).token == null && Provider.of<RegisterProvider>(context).token == null){
-       token = null;
-     }
-     return token;
+    if (Provider.of<LogInProvider>(context).token == null &&
+        Provider.of<RegisterProvider>(context).token == null) {
+      token = null;
+    }
+    return token;
     // String t ;
     // Future<String> authToken = sessionManager.getAuthToken();
     // authToken.then((data) {
@@ -46,7 +47,6 @@ class _ProfileState extends State<Profile> {
     // });
     // token = await authToken;
     // return t;
-
   }
 
   @override
@@ -60,37 +60,38 @@ class _ProfileState extends State<Profile> {
     // print("profile token "+token);
     // print("profile token 2"+token);
     print("rebuilt");
-    print("ttt "+(_getToken().toString()));
-     // _getToken();
+    print("ttt " + (_getToken().toString()));
+    // _getToken();
     token = Provider.of<LogInProvider>(context).token;
-    if(token == null){
+    if (token == null) {
       token = Provider.of<RegisterProvider>(context).token;
     }
     return Scaffold(
 
-      // appBar: topBar(context, barWithBack(context), Text ('Profile'),Text('')),
-      // bottomNavigationBar: BottomBar(),
-      body:
-      token == null ? Center(child: Container(child: Text('You should LogIn First',style: TextStyle(fontWeight: FontWeight.bold),),)) :
-      FutureBuilder(
-        future: Provider.of<ProfileProvider>(context,listen: false).getProfile(token),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            user = snapshot.data.user;
-            if(user!=null){
-              print("userInfo" + user.toString());
-              return profileBodyWidget(user);
-            }
+        // appBar: topBar(context, barWithBack(context), Text ('Profile'),Text('')),
+        // bottomNavigationBar: BottomBar(),
+        body: token == null
+            ? SignIn()
+            : FutureBuilder(
+                future: Provider.of<ProfileProvider>(context, listen: false)
+                    .getProfile(token),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    user = snapshot.data.user;
+                    if (user != null) {
+                      print("userInfo" + user.toString());
+                      return profileBodyWidget(user);
+                    }
+                  } else if (snapshot.hasError) {
+                    return Text("${snapshot.error}");
+                  }
 
-          } else if (snapshot.hasError) {
-            return Text("${snapshot.error}");
-          }
-
-
-          return Center(child: CircularProgressIndicator(backgroundColor: Colors.teal,));
-        },
-      )
-    );
+                  return Center(
+                      child: CircularProgressIndicator(
+                    backgroundColor: Colors.teal,
+                  ));
+                },
+              ));
   }
 
   Widget profileBodyWidget(User user) {
@@ -265,7 +266,11 @@ class _ProfileState extends State<Profile> {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => MyAddresses(addressList:Provider.of<ProfileProvider>(context).addresses ,)),
+              MaterialPageRoute(
+                  builder: (context) => MyAddresses(
+                        addressList:
+                            Provider.of<ProfileProvider>(context).addresses,
+                      )),
             );
           },
           child: Center(
@@ -329,4 +334,3 @@ class _ProfileState extends State<Profile> {
     );
   }
 }
-
